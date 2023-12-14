@@ -1,0 +1,34 @@
+version: 2
+jobs:
+  build:
+   docker:
+   # specify the version you desire here
+   - image: muuk/muuktest_v1:0.1
+   environment:
+   GRADLE_OPTS: -Xmx1024m -XX:MaxMetaspaceSize=256m
+   GRADLE_USER_HOME: .gradle-home
+
+   # Specify service dependencies here if necessary
+   # CircleCI maintains a library of pre-built images
+   # documented at https://circleci.com/docs/2.0/circleci-images/
+
+   steps:
+   - run:
+   command: |
+           Xvfb :99 -screen 0 1366x768x16 -nolisten tcp -fbdir /var/run >
+/dev/null 2>&1 &
+           export DISPLAY=:99
+           git clone https://github.com/muuklabs/executor.git
+           cd executor/
+           git checkout videoEnabled
+           printf $muuk_key > key.pub
+           cat key.pub
+           chmod 755 gradlew
+           chmod 755 key.pub
+           sed -i 's/79.0.3945.36/90.0.4430.24/g' build.gradle
+           cat build.gradle
+           if [ -z ${muuk_hashtag+z} ]; then
+           python3.7 mkcli.py -p hashtag -t $muuk_hashtag
+           else
+           python3.7 mkcli.py -p hashtag -t $muuk_testId
+           fi;
