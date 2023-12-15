@@ -27,7 +27,7 @@ jobs:
         sed -i 's/79.0.3945.36/90.0.4430.24/g' build.gradle
         cat build.gradle
         if [ -z ${muuk_hashtag+z} ]; then
-            python3.7 mkcli.py -p hashtag -t $muuk_hashtag
+            python3.7 mkcli.py -p hashtag -t "$muuk_hashtag"
         else
-            python3.7 mkcli.py -p hashtag -t $muuk_testId
+            python3.7 mkcli.py -p hashtag -t "$muuk_testId"
         fi;
