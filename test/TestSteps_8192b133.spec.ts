@@ -49,7 +49,7 @@ test('demowebshopTricentisCom8192b133',  async ({ page, context }) => {
   let creditCardCCV = `123`;
   let expireYear = `2024`;
   let expireMonth = `4`;
-  let correoTricentis = `josearturo` + Date.now().toString() + `josearturoty87/85@hotmail.com`;
+  let correoTricentis = `josearturo` + Date.now().toString() + `@hotmail.com`;
 
   // Monitor for new pages
   context.on('page', async (eventPage) => {
